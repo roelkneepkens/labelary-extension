@@ -34,7 +34,12 @@ export function activate(context: vscode.ExtensionContext) {
 
 		if (editor) {
 			const document = editor.document;
+			//let selectionString:string = '';
 			const selection = editor.selection;
+			// .forEach(selected =>{
+			// 	selectionString += selected;
+
+			// });
 
 			// Get the word within the selection
 			zpl = document.getText(selection);
@@ -218,6 +223,8 @@ export function activate(context: vscode.ExtensionContext) {
 	if (!isZPL(txtZPL)){
 		txtZPL = Buffer.from(txtZPL, 'base64').toString('binary');
 	}
+	txtZPL = txtZPL.replaceAll('\n','');
+	txtZPL = txtZPL.replaceAll('\r','');
 	txtZPL = txtZPL.replaceAll('^xz','^XZ');
 	labelArray = txtZPL.split("^XZ");
 	labelArray.forEach(async function(zpl, index){

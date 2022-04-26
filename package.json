@@ -1,8 +1,8 @@
 {
-  "name": "dash1",
-  "displayName": "dash1",
-  "description": "dash1",
-  "version": "0.0.1",
+  "name": "labelary",
+  "displayName": "Labelary Extension",
+  "description": "Labelary viewer for VS Code",
+  "version": "0.0.2",
   "publisher": "RoelKneepkens-ShipitSmarter",
   "engines": {
     "vscode": "^1.66.0"
