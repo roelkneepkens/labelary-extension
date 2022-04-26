@@ -1,0 +1,7 @@
+POST /v1/printers/8dpmm/labels/4x6/0/ HTTP/1.1
+Host: api.labelary.com
+Accept: image/png
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 40
+
+^XA^FO220,50^FDIntershipping, Inc.^FS^XZ
