@@ -18,9 +18,18 @@
     "commands": [
       {
         "command": "labelary-panel.labelary",
-        "title": "labelary: open labelary viewer"
+        "title": "Label: View"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "labelary-panel.labelary",
+          "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
+          "group": "labelary-panel"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
