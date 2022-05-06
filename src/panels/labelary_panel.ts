@@ -240,11 +240,9 @@ export class LabelaryPanel {
       let v = new View();
   
       let decodedString = b64u.prepareForDecoding(base64String);
-      //b64u.getMimeType(base64String).then((mimeType: string) => {
-        // v.createView(extensionRoot, decodedString, mimeType, 'decoding');
-        let mimeType = b64u.getMimeType(base64String);
+      b64u.getMimeType(base64String).then((mimeType: string) => {
         v.createView(extensionRoot, decodedString, mimeType, 'decoding');
-      //});
+      });
     } else {
       this._showErrorPopup(messages.general.operationCancelled);
     }
