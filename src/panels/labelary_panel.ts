@@ -1,53 +1,35 @@
 import * as vscode from "vscode";
 import axios from 'axios';
-import { getUri } from "../utilities/functions";
+import { getUri, removeAfterFirstQuote, removeNewlines, reverseString } from "../utilities/functions";
 import { Base64Utils } from '../utilities/base64utils';
 import { Localizer } from '../utilities/localizer';
 import { View } from '../utilities/view';
+import { reverse } from "dns";
 const xss = require('xss');
 //import { xss } from "xss";
 
 export class LabelaryPanel {
   // PROPERTIES
   public static currentPanel: LabelaryPanel | undefined;
-  private _panel: vscode.WebviewPanel;
+  //private _panel: vscode.WebviewPanel;
   private _labelString: string = '';
   private _disposables: vscode.Disposable[] = [];
 
   // constructor
   private constructor(extensionUri: vscode.Uri, context: vscode.ExtensionContext) {
 
-    const editor = vscode.window.activeTextEditor;
-
-    if (editor) {
-      const document = editor.document;
-      const selection = editor.selection;
-      // Get the word within the selection
-      this._labelString = document.getText(selection);
-    }
+    // retrieve intended label string
+    this._labelString = this._getIntendedLabelString();
 
     // if ZPL: render zpl webview
     if (this._isZPL(this._labelString) || this._isBase64ZPL(this._labelString) ) {
-      this._panel = vscode.window.createWebviewPanel("labelary-panel", "Display Labelary", vscode.ViewColumn.Two, { enableScripts: true });
-      this._getZplWebviewContent(this._panel.webview, extensionUri).then(html => this._panel.webview.html = html);
+      let panel = vscode.window.createWebviewPanel("labelary-panel", "Display Labelary", vscode.ViewColumn.Two, { enableScripts: true });
+      this._getZplWebviewContent(panel.webview, extensionUri).then(html => panel.webview.html = html);
     } 
     // else: render pdf view
     else {
       this._decodeAndDisplay(vscode.Uri.file(context.extensionPath), xss(this._labelString));
     }
-
-    // set ondidchangeviewstate
-    //  this._panel.onDidChangeViewState(e => {
-    //     const panel = e.webviewPanel;
-    //     let isVisible = panel.visible;
-
-    //     if (isVisible) {
-    //       this._updateWebview(extensionUri);
-    //     }
-    //   },
-    //     null,
-    //     context.subscriptions
-    //   );
 
     // on dispose
     //this._panel.onDidDispose(this.dispose, null, this._disposables);
@@ -65,6 +47,41 @@ export class LabelaryPanel {
   // private _updateWebview(extensionUri: vscode.Uri) {
   //   this._getZplWebviewContent(this._panel.webview, extensionUri).then(html => this._panel.webview.html = html);
   // }
+
+
+  private _getIntendedLabelString(): string {
+    const editor = vscode.window.activeTextEditor;
+    let intendedLabelString : string = '';
+
+    if (editor) {
+      const document = editor.document;
+      const selection = editor.selection;
+
+      // if anything selected: return selected string
+      if (document.getText(selection) !== '') {
+        intendedLabelString = document.getText(selection);
+      }
+
+      // else: retrieve from cursor context
+      // get from both sides of the cursor all text between any kind of quote character, or if not present, from start/till end of the document
+      else {
+        let cursorLineNumber:       number = selection.active.line;
+        let cursorCharNumber:       number = selection.active.character;
+        let lastLine:               number = document.lineCount -1;
+        let lastLineLastCharacter:  number = document.lineAt(lastLine).text.length;
+  
+        let textBeforeRaw = document.getText(new vscode.Range(new vscode.Position(0,0), new vscode.Position(cursorLineNumber, cursorCharNumber)));
+        let labelStringBefore = reverseString(removeAfterFirstQuote(reverseString(removeNewlines(textBeforeRaw))));
+
+        let textAfterRaw =  document.getText(new vscode.Range(new vscode.Position(cursorLineNumber,cursorCharNumber), new vscode.Position(lastLine, lastLineLastCharacter)));
+        let labelStringAfter = removeAfterFirstQuote(removeNewlines(textAfterRaw));
+
+        intendedLabelString = labelStringBefore + labelStringAfter;
+      }
+    }
+
+    return intendedLabelString;
+  }
 
   private async _getZplWebviewContent(webview: vscode.Webview, extensionUri: vscode.Uri): Promise<string> {
     // const toolkitUri = getUri(webview, extensionUri, ["node_modules","@vscode", "webview-ui-toolkit", "dist", "toolkit.js", ]);
@@ -256,7 +273,7 @@ export class LabelaryPanel {
   public dispose() {
     LabelaryPanel.currentPanel = undefined;
 
-    this._panel.dispose();
+    //this._panel.dispose();
 
     while (this._disposables.length) {
       const disposable = this._disposables.pop();

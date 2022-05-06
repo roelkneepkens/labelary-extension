@@ -25,88 +25,14 @@ export function getExtensionFile(context: ExtensionContext, folder: string, file
 	return filePath;
 }
 
-export function startScript (fileName ?: string , filePath ?: string , command ?: string) : Terminal {
-	let terminal = window.createTerminal('bram');
-	terminal.show();
-	//terminal.sendText('Get-Location');
-	if (filePath && filePath !== '') {
-		terminal.sendText(`cd ${filePath}`);
-	};
-	
-	if (fileName && fileName !== '') {
-		terminal.sendText(`./${fileName}`);
-	};
-
-	if (command && command !== '') {
-		terminal.sendText(command);
-	};
-	
-	return terminal;
+export function removeNewlines(string:string) : string {
+	return string.replace(/\r/g,'').replace(/\n/g,'');
 }
 
-export function cleanPath (path: string) : string {
-	return path.replace(/\\/g, '/');
+export function reverseString(string: string) : string {
+	return string.split("").reverse().join("");
 }
 
-export function parentPath (path: string) : string {
-	return path.replace(/\/[^\/]+$/,'');
-}
-
-export function nth(num:number): string {
-	let after:string = '';
-	switch (num) {
-		case 1 :
-		after = 'st';
-		break;
-		case 2 :
-		after = 'nd';
-		break;
-		case 3 :
-		after = 'rd';
-		break;
-		default:
-		after = 'th';
-		break;
-	}
-	return after;
-}
-
-export function dropdownOptions(options:(string|number)[]) : string {
-	let optionsString : string = '';
-	for (const option of options) {
-		optionsString += '\n    <vscode-option>' + option + '</vscode-option>';
-	}
-
-	return optionsString;
-}
-
-export function arrayFrom0(max:number) : number[] {
-	// from https://stackoverflow.com/a/33352604/1716283
-	return [...Array(max).keys()];
-}
-
-export function arrayFrom1(max:number) : number[] {
-	return arrayFrom0(max).map(x => ++x);
-}
-
-export function toBoolean(string:string) : boolean {
-	let outString : boolean = false;
-	if (string.toLowerCase() === 'true') {
-		outString = true;
-	}
-
-	return outString;
-}
-
-export function isEmptyStringArray(array: String[]) : boolean {
-	let isEmpty: boolean = true;
-
-	for (let index = 0; index < array.length; index++) {
-        let current = array[index];
-		if (current !== undefined && ("" + current) !== "") {
-			isEmpty = false;
-			break;
-		}
-	}
-	return isEmpty;
+export function removeAfterFirstQuote(string: string) : string {
+	return string.replace(/["'`][\s\S]*$/g,'');
 }
