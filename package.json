@@ -11,13 +11,13 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:mypanel.start"
+    "onCommand:decode.labelary"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "mypanel.start",
+        "command": "decode.labelary",
         "title": "labelary"
       }
     ]
