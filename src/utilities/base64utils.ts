@@ -21,12 +21,15 @@ export class Base64Utils {
 		return size;
 	}
 
-	public async getMimeType(base64String: any): Promise<string> {
-		return new Promise<string>((resolve) => {
+	//public async getMimeType(base64String: any): Promise<string> {
+	public getMimeType(base64String: any): string {
+		let mimeType : string = '';
+		//return new Promise<string>((resolve) => {
 			let mT = new MimeTypes();
 			let mime = base64String.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/);
 			if (mime && mime.length) {
-				resolve(mime[1]);
+				//resolve(mime[1]);
+				mimeType = mime[1];
 			} else {
 				let byteNumber = null;
 				let decodedString = Buffer.from("'" + base64String + "'", 'base64');
@@ -38,21 +41,23 @@ export class Base64Utils {
 				}
 				let guessedMimeType = this.getMimeTypeFromBinary(hex);
 
-				if (guessedMimeType === 'Unknown filetype') {
-					vscode.window.showQuickPick(mT.types, { placeHolder: 'Choose the format of the document...' }).then(
-						(selectedType) => {
-							selectedType ? resolve(mT.mimeTypes.get(selectedType)) : resolve('');
-						},
-						(reason) => {
-							console.log('Error: ' + reason);
-							resolve('');
-						},
-					);
-				} else {
-					resolve(guessedMimeType);
-				}
+				// if (guessedMimeType === 'Unknown filetype') {
+				// 	vscode.window.showQuickPick(mT.types, { placeHolder: 'Choose the format of the document...' }).then(
+				// 		(selectedType) => {
+				// 			selectedType ? resolve(mT.mimeTypes.get(selectedType)) : resolve('');
+				// 		},
+				// 		(reason) => {
+				// 			console.log('Error: ' + reason);
+				// 			resolve('');
+				// 		},
+				// 	);
+				// } else {
+					//resolve(guessedMimeType);
+					mimeType = guessedMimeType;
+				// }
 			}
-		});
+		//});
+		return mimeType;
 	}
 
 	private getMimeTypeFromBinary(hex: string) {

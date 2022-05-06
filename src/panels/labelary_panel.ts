@@ -4,7 +4,8 @@ import { getUri } from "../utilities/functions";
 import { Base64Utils } from '../utilities/base64utils';
 import { Localizer } from '../utilities/localizer';
 import { View } from '../utilities/view';
-//import * as xss from "xss";
+const xss = require('xss');
+//import { xss } from "xss";
 
 export class LabelaryPanel {
   // PROPERTIES
@@ -17,7 +18,6 @@ export class LabelaryPanel {
   private constructor(extensionUri: vscode.Uri, context: vscode.ExtensionContext) {
 
     const editor = vscode.window.activeTextEditor;
-    const xss = require('xss');
 
     if (editor) {
       const document = editor.document;
@@ -33,9 +33,8 @@ export class LabelaryPanel {
     } 
     // else: render pdf view
     else {
-      this._decodeAndDisplay(extensionUri, xss(this._labelString));
+      this._decodeAndDisplay(vscode.Uri.file(context.extensionPath), xss(this._labelString));
     }
-
 
     // set ondidchangeviewstate
     //  this._panel.onDidChangeViewState(e => {
@@ -196,7 +195,6 @@ export class LabelaryPanel {
     return this._isZPL(checkString);
   }
 
-
   private async _getLabelaryData(labelArray: string[]): Promise<string> {
     let resultString: string;
     resultString = '';
@@ -211,7 +209,6 @@ export class LabelaryPanel {
 
     return resultString;
   };
-
 
   private async _getPNGFromLabelary(zpl: string): Promise<string> {
 
@@ -243,9 +240,11 @@ export class LabelaryPanel {
       let v = new View();
   
       let decodedString = b64u.prepareForDecoding(base64String);
-      b64u.getMimeType(base64String).then((mimeType: string) => {
+      //b64u.getMimeType(base64String).then((mimeType: string) => {
+        // v.createView(extensionRoot, decodedString, mimeType, 'decoding');
+        let mimeType = b64u.getMimeType(base64String);
         v.createView(extensionRoot, decodedString, mimeType, 'decoding');
-      });
+      //});
     } else {
       this._showErrorPopup(messages.general.operationCancelled);
     }
