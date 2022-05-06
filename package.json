@@ -11,14 +11,14 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:decode.labelary"
+    "onCommand:labelary-panel.labelary"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "decode.labelary",
-        "title": "labelary"
+        "command": "labelary-panel.labelary",
+        "title": "labelary: open labelary viewer"
       }
     ]
   },
