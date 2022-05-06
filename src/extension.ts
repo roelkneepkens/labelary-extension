@@ -58,7 +58,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let labelaryData = await getLabelaryData(labelArray);
 	// construct your HTML code
-	html += `<!DOCTYPE html>
+	html +=  /*html*/
+	`<!DOCTYPE html>
 			<html>
 			<head>
 			<meta name="viewport" content="width=device-width, initial-scale=1">
