@@ -47,7 +47,10 @@
   "dependencies": {
     "axios": "^0.26.1",
     "filereader": "^0.10.3",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+		"mime": "2.4.6",
+		"pdfjs-dist": "2.4.456",
+		"xss": "1.0.8"
   },
   "repository":{
     "type": "git",
