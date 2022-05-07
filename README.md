@@ -1,8 +1,8 @@
 # Labelary and PDF viewer
 
-[![](https://vsmarketplacebadge.apphb.com/version-short/roelkneepkens.labelary.svg)](https://marketplace.visualstudio.com/items?itemName=roelkneepkens.labelary)
-[![](https://vsmarketplacebadge.apphb.com/installs-short/roelkneepkens.labelary.svg)](https://marketplace.visualstudio.com/items?itemName=roelkneepkens.labelary)
-[![](https://vsmarketplacebadge.apphb.com/rating-short/roelkneepkens.labelary.svg)](https://marketplace.visualstudio.com/items?itemName=roelkneepkens.labelary)
+[![](https://vsmarketplacebadge.apphb.com/version-short/RoelKneepkens-ShipitSmarter.labelary.svg)](https://marketplace.visualstudio.com/items?itemName=RoelKneepkens-ShipitSmarter.labelary)
+[![](https://vsmarketplacebadge.apphb.com/installs-short/RoelKneepkens-ShipitSmarter.labelary.svg)](https://marketplace.visualstudio.com/items?itemName=RoelKneepkens-ShipitSmarter.labelary)
+[![](https://vsmarketplacebadge.apphb.com/rating-short/RoelKneepkens-ShipitSmarter.labelary.svg)](https://marketplace.visualstudio.com/items?itemName=RoelKneepkens-ShipitSmarter.labelary)
 
 ![Labelary and PDF viewer](https://raw.githubusercontent.com/roelkneepkens/labelary-extension/main/img/labelary-use-gif.gif)
 
