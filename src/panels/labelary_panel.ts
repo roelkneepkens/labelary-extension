@@ -4,7 +4,6 @@ import { getUri, removeAfterFirstQuote, removeNewlines, reverseString } from "..
 import { Base64Utils } from '../utilities/base64utils';
 import { Localizer } from '../utilities/localizer';
 import { View } from '../utilities/view';
-import { reverse } from "dns";
 const xss = require('xss');
 //import { xss } from "xss";
 
@@ -30,18 +29,11 @@ export class LabelaryPanel {
     else {
       this._decodeAndDisplay(vscode.Uri.file(context.extensionPath), xss(this._labelString));
     }
-
-    // on dispose
-    //this._panel.onDidDispose(this.dispose, null, this._disposables);
   }
 
   // METHODS
   public static render(extensionUri: vscode.Uri, context: vscode.ExtensionContext) {
-    // if (LabelaryPanel.currentPanel) {
-      // LabelaryPanel.currentPanel._panel.reveal(vscode.ViewColumn.Two);
-    // } else {
       LabelaryPanel.currentPanel = new LabelaryPanel(extensionUri, context);
-    // }
   }
 
   // private _updateWebview(extensionUri: vscode.Uri) {
@@ -84,7 +76,6 @@ export class LabelaryPanel {
   }
 
   private async _getZplWebviewContent(webview: vscode.Webview, extensionUri: vscode.Uri): Promise<string> {
-    // const toolkitUri = getUri(webview, extensionUri, ["node_modules","@vscode", "webview-ui-toolkit", "dist", "toolkit.js", ]);
     // const mainUri = getUri(webview, extensionUri, ["panels", "helloworld","main.js"]);
     const styleUri = getUri(webview, extensionUri, ["panels", "labelary", "style.css"]);
 
