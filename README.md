@@ -23,7 +23,7 @@ Alternatively, use `Ctrl` + `Shift` + `P` and search for `View Panel`.
   - PDF
   - Images
 
-For extensive Base64 support details, see [Jason Mejane](https://marketplace.visualstudio.com/publishers/JasonMejane)'s [Base64Viewer](https://marketplace.visualstudio.com/items?itemName=JasonMejane.base64viewer) documentation.
+For extensive Base64 support details, see [Base64Viewer](https://marketplace.visualstudio.com/items?itemName=JasonMejane.base64viewer) documentation.
 
 ## Change Log
 See Change Log [here](CHANGELOG.md)
