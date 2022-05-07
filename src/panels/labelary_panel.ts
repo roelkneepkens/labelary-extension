@@ -4,7 +4,6 @@ import { getUri, removeAfterFirstQuote, removeNewlines, reverseString } from "..
 import { Base64Utils } from '../utilities/base64utils';
 import { Localizer } from '../utilities/localizer';
 import { View } from '../utilities/view';
-import { reverse } from "dns";
 const xss = require('xss');
 //import { xss } from "xss";
 
@@ -30,18 +29,11 @@ export class LabelaryPanel {
     else {
       this._decodeAndDisplay(vscode.Uri.file(context.extensionPath), xss(this._labelString));
     }
-
-    // on dispose
-    //this._panel.onDidDispose(this.dispose, null, this._disposables);
   }
 
   // METHODS
   public static render(extensionUri: vscode.Uri, context: vscode.ExtensionContext) {
-    // if (LabelaryPanel.currentPanel) {
-      // LabelaryPanel.currentPanel._panel.reveal(vscode.ViewColumn.Two);
-    // } else {
       LabelaryPanel.currentPanel = new LabelaryPanel(extensionUri, context);
-    // }
   }
 
   // private _updateWebview(extensionUri: vscode.Uri) {
@@ -84,7 +76,6 @@ export class LabelaryPanel {
   }
 
   private async _getZplWebviewContent(webview: vscode.Webview, extensionUri: vscode.Uri): Promise<string> {
-    // const toolkitUri = getUri(webview, extensionUri, ["node_modules","@vscode", "webview-ui-toolkit", "dist", "toolkit.js", ]);
     // const mainUri = getUri(webview, extensionUri, ["panels", "helloworld","main.js"]);
     const styleUri = getUri(webview, extensionUri, ["panels", "labelary", "style.css"]);
 
@@ -103,58 +94,57 @@ export class LabelaryPanel {
     html +=  /*html*/
       `<!DOCTYPE html>
         <html>
-        <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="${styleUri}" rel="stylesheet" />  
+          <head>
+            <meta name="viewport">
+            <link href="${styleUri}" rel="stylesheet" />  
           <body>
-          <!-- Slideshow container -->
-          <div class="slideshow-container">
-  
-            <!-- Full-width images with number and caption text -->
-            ${labelData}
+            <!-- Slideshow container -->
+            <div class="slideshow-container">
+    
+              <!-- Full-width images with number and caption text -->
+              ${labelData}
+    
+              <!-- Next and previous buttons -->
+              <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+              <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
-  
-          <!-- Next and previous buttons -->
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
-          </div>
-          <br>
-  
-          <!-- The dots/circles -->
-          <div style="text-align:center">
-            ${selectorDots}
-          </div>
+              <!-- The dots/circles -->
+              <div class="dots" style="text-align:center">
+                ${selectorDots}
+              </div>
+            </div>
+            <br>
+    
             <script>
-            let slideIndex = 1;
-            showSlides(slideIndex);
-            
-            function plusSlides(n) {
-            showSlides(slideIndex += n);
-            }
-            
-            function currentSlide(n) {
-            showSlides(slideIndex = n);
-            }
-            
-            function showSlides(n) {
-              let i;
-              let slides = document.getElementsByClassName("mySlides");
-              let dots = document.getElementsByClassName("dot");
-              if (n > slides.length) {slideIndex = 1}    
-              if (n < 1) {slideIndex = slides.length}
-              for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
+              let slideIndex = 1;
+              showSlides(slideIndex);
+              
+              function plusSlides(n) {
+              showSlides(slideIndex += n);
               }
-              for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
+              
+              function currentSlide(n) {
+              showSlides(slideIndex = n);
               }
-              slides[slideIndex-1].style.display = "block";  
-              dots[slideIndex-1].className += " active";
-            }
+              
+              function showSlides(n) {
+                let i;
+                let slides = document.getElementsByClassName("mySlides");
+                let dots = document.getElementsByClassName("dot");
+                if (n > slides.length) {slideIndex = 1}    
+                if (n < 1) {slideIndex = slides.length}
+                for (i = 0; i < slides.length; i++) {
+                  slides[i].style.display = "none";  
+                }
+                for (i = 0; i < dots.length; i++) {
+                  dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex-1].style.display = "block";  
+                dots[slideIndex-1].className += " active";
+              }
             </script>
           </body>
-         </html>
-    `;
+        </html>`;
     // -----------------------
     return html;
   }
@@ -218,9 +208,8 @@ export class LabelaryPanel {
     await Promise.all(labelArray.map(async (zpl, index) => {
       const labelaryResult = await this._getPNGFromLabelary(zpl);
       resultString += `<div class="mySlides fade">
-                  <div class="numbertext">${index + 1} / ${labelArray.length}</div>
-                  <img src="data:image/png;base64,${labelaryResult}" style="width:50%;"/>
-                  <div class="text">Labelary label</div>
+                  <div class="numbertext"> <span>${index + 1} / ${labelArray.length}</span></div>
+                  <img src="data:image/png;base64,${labelaryResult}"/>
                 </div>`;
     }));
 

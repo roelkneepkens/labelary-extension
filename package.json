@@ -2,7 +2,8 @@
   "name": "labelary",
   "displayName": "Labelary and PDF viewer",
   "description": "View Labelary, PDF and other base64-encoded formats in separate panel on right-mouse-button click.",
-  "version": "0.0.3",
+  "license": "MIT",
+  "version": "1.0.3",
   "publisher": "RoelKneepkens-ShipitSmarter",
   "author": {
 		"name": "Roel Kneepkens",
