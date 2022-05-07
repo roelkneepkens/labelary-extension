@@ -240,11 +240,7 @@ export class View {
                         <style>${this.style}</style>
                     </head>`;
 			body = `
-                <body>
-                    <div class="title-bar">
-                        <h1>${this.messages.general.title}</h1>
-                    </div>
-            
+                <body>            
                     <div class="page-content two-col">
                         <div>
                             <h3>${mimeType}  (${fileSize})</h3>
@@ -442,9 +438,6 @@ export class View {
                     </head>`;
 			body = `
                 <body>
-                    <div class="title-bar">
-                        <h1>${this.messages.general.title}</h1>
-                    </div>
             
                     <div class="page-content">
                         <h3>${mimeType}  (${fileSize})</h3>
@@ -486,9 +479,6 @@ export class View {
                     </head>`;
 			body = `
                 <body>
-                    <div class="title-bar">
-                        <h1>${this.messages.general.title}</h1>
-                    </div>
             
                     <div class="page-content">
                         <h3>${mimeType}  (${fileSize})</h3>
@@ -536,9 +526,6 @@ export class View {
                     </head>`;
 			body = `
                 <body>
-                    <div class="title-bar">
-                        <h1>${this.messages.general.title}</h1>
-                    </div>
             
                     <div class="page-content">
                         <h3>${mimeType}  (${fileSize})</h3>

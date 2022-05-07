@@ -1,32 +1,53 @@
 {
   "name": "labelary",
-  "displayName": "Labelary Extension",
-  "description": "Labelary viewer for VS Code",
-  "version": "0.0.2",
+  "displayName": "Labelary and PDF viewer",
+  "description": "View Labelary, PDF and other base64-encoded formats in separate panel on right-mouse-button click.",
+  "version": "0.0.3",
   "publisher": "RoelKneepkens-ShipitSmarter",
+  "author": {
+		"name": "Roel Kneepkens",
+		"url": "https://github.com/roelkneepkens"
+	},
+	"contributors": [
+		{
+			"name": "Bram van der Horn",
+			"url": "https://github.com/bvanderhorn"
+		},
+    {
+			"name": "Wouter Keizer",
+			"url": "https://github.com/WouterKeizer"
+		}
+	],
   "engines": {
     "vscode": "^1.66.0"
   },
   "categories": [
-    "Other"
+    "Visualization"
+  ],
+  "keywords": [
+    "ShipitSmarter",
+    "Labelary",
+    "PDF",
+    "Base64",
+    "Viewer"
   ],
   "activationEvents": [
-    "onCommand:labelary-panel.labelary"
+    "onCommand:labelary.view-label"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "labelary-panel.labelary",
-        "title": "Label: View"
+        "command": "labelary.view-label",
+        "title": "View label"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "labelary-panel.labelary",
+          "command": "labelary.view-label",
           "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
-          "group": "labelary-panel"
+          "group": "labelary"
         }
       ]
     }
@@ -64,5 +85,6 @@
   "repository":{
     "type": "git",
     "url": "https://github.com/roelkneepkens/labelary-extension"
-  }
+  },
+  "icon": "img/labelary-logo.png"
 }
