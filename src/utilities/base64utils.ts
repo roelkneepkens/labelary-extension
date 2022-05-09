@@ -41,7 +41,7 @@ export class Base64Utils {
 				if (guessedMimeType === 'Unknown filetype') {
 					vscode.window.showQuickPick(mT.types, { placeHolder: 'Choose the format of the document...' }).then(
 						(selectedType) => {
-							selectedType ? resolve(mT.mimeTypes.get(selectedType)) : resolve('');
+							selectedType ? resolve(mT.mimeTypes.get(selectedType) ?? '') : resolve('');
 						},
 						(reason) => {
 							console.log('Error: ' + reason);
