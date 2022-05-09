@@ -208,7 +208,6 @@ export class LabelaryPanel {
     await Promise.all(labelArray.map(async (zpl, index) => {
       const labelaryResult = await this._getPNGFromLabelary(zpl);
       resultString += `<div class="mySlides fade">
-                  <div class="numbertext"> <span>${index + 1} / ${labelArray.length}</span></div>
                   <img src="data:image/png;base64,${labelaryResult}"/>
                 </div>`;
     }));
