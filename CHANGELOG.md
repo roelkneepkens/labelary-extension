@@ -13,3 +13,6 @@ All notable changes to the "Labelary" extension will be documented in this file.
 - Incorporated the decoding part of [Jason Mejane](https://marketplace.visualstudio.com/publishers/JasonMejane)'s [Base64Viewer](https://marketplace.visualstudio.com/items?itemName=JasonMejane.base64viewer) (v1.2.1)
 - Added cursor context logic
 - Added right-mouse-click option
+
+## 1.0.4
+- Changed logo
