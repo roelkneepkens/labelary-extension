@@ -13,5 +13,5 @@ export function reverseString(string: string) : string {
 }
 
 export function removeAfterFirstQuote(string: string) : string {
-	return string.replace(/["'`<>\s\|\[\]\{\}\(\)\\\/][\s\S]*$/g,'');
+	return string.replace(/["<>][\s\S]*$/g,'');
 }
