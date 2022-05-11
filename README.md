@@ -36,6 +36,5 @@ Fork the [repo](https://github.com/roelkneepkens/labelary-extension/) and submit
 
 ## Acknowledgements
 - Incorporated the decoding part of [Jason Mejane](https://marketplace.visualstudio.com/publishers/JasonMejane)'s [Base64Viewer](https://marketplace.visualstudio.com/items?itemName=JasonMejane.base64viewer) (v1.2.1)
-- Extension icon from [labelary.com](http://labelary.com/)
 
 
