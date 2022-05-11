@@ -12,6 +12,6 @@ export function reverseString(string: string) : string {
 	return string.split("").reverse().join("");
 }
 
-export function removeAfterFirstQuote(string: string) : string {
+export function removeAfterFirstDelimiter(string: string) : string {
 	return string.replace(/["<>][\s\S]*$/g,'');
 }

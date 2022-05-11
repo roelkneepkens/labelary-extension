@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import axios from 'axios';
-import { getUri, removeAfterFirstQuote, removeNewlines, reverseString } from "../utilities/functions";
+import { getUri, removeAfterFirstDelimiter, removeNewlines, reverseString } from "../utilities/functions";
 import { Base64Utils } from '../utilities/base64utils';
 import { Localizer } from '../utilities/localizer';
 import { View } from '../utilities/view';
@@ -63,10 +63,10 @@ export class LabelaryPanel {
         let lastLineLastCharacter:  number = document.lineAt(lastLine).text.length;
   
         let textBeforeRaw = document.getText(new vscode.Range(new vscode.Position(0,0), new vscode.Position(cursorLineNumber, cursorCharNumber)));
-        let labelStringBefore = reverseString(removeAfterFirstQuote(reverseString(removeNewlines(textBeforeRaw))));
+        let labelStringBefore = reverseString(removeAfterFirstDelimiter(reverseString(removeNewlines(textBeforeRaw))));
 
         let textAfterRaw =  document.getText(new vscode.Range(new vscode.Position(cursorLineNumber,cursorCharNumber), new vscode.Position(lastLine, lastLineLastCharacter)));
-        let labelStringAfter = removeAfterFirstQuote(removeNewlines(textAfterRaw));
+        let labelStringAfter = removeAfterFirstDelimiter(removeNewlines(textAfterRaw));
 
         intendedLabelString = labelStringBefore + labelStringAfter;
       }
