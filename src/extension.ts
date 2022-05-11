@@ -3,10 +3,17 @@ import { LabelaryPanel } from './panels/labelary_panel';
 
 
 export function activate(context: vscode.ExtensionContext) {
-	// Create Integration panel
-	const labelaryPanelCommand = vscode.commands.registerCommand('labelary.view-label', () => {
-		LabelaryPanel.render(context.extensionUri, context);
+	// Command for raw ZPL label
+	const rawZplPanelCommand = vscode.commands.registerCommand('labelary.view-zpl-label', () => {
+		LabelaryPanel.render(context.extensionUri, context, 'zpl');
 	});
 	
-	context.subscriptions.push(labelaryPanelCommand);	
+	context.subscriptions.push(rawZplPanelCommand);
+
+	// Command for raw ZPL label
+	const Base64PanelCommand = vscode.commands.registerCommand('labelary.view-base64-label', () => {
+		LabelaryPanel.render(context.extensionUri, context, 'base64');
+	});
+	
+	context.subscriptions.push(Base64PanelCommand);	
 }

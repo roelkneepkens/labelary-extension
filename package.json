@@ -34,20 +34,30 @@
     "Viewer"
   ],
   "activationEvents": [
-    "onCommand:labelary.view-label"
+    "onCommand:labelary.view-zpl-label",
+    "onCommand:labelary.view-base64-label"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "labelary.view-label",
-        "title": "View label"
+        "command": "labelary.view-zpl-label",
+        "title": "View raw ZPL label"
+      },
+      {
+        "command": "labelary.view-base64-label",
+        "title": "View Base64 label"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "labelary.view-label",
+          "command": "labelary.view-zpl-label",
+          "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
+          "group": "labelary"
+        },
+        {
+          "command": "labelary.view-base64-label",
           "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
           "group": "labelary"
         }
