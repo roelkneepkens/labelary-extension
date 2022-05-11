@@ -6,7 +6,7 @@
 
 ![Labelary and PDF viewer](https://raw.githubusercontent.com/roelkneepkens/labelary-extension/main/img/labelary-use-gif.gif)
 
-View Labelary, PDF and other base64-encoded formats in separate panel on right-mouse-button click.
+View Labelary (ZPL), PDF and other base64-encoded formats in separate panel on right-mouse-button click.
 
 Use as follows:
 - Right-click somewhere in the Labelary or Base64 string in the Editor
