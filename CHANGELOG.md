@@ -19,5 +19,6 @@ All notable changes to the "Labelary" extension will be documented in this file.
 
 
 ## 1.0.5
-- updated possible string delimiters to: "<>
-  - If you have a ZPL that contains any of these delimiters: don't use right-mouse-click; select string instead.
+- added two separate buttons:
+  - View raw ZPL label -> for viewing raw ZPLs, delimited by "<>
+  - View Base64 label -> for base64 strings, delimited by "'`<>{}[]()|\/:;, and spaces, newlines, carriage returns
