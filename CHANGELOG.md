@@ -19,4 +19,5 @@ All notable changes to the "Labelary" extension will be documented in this file.
 
 
 ## 1.0.5
-- added possible string delimiters: "'`<>|{}[]()/\ and whitespaces, newlines, carriage returns
+- updated possible string delimiters to: "<>
+  - If you have a ZPL that contains any of these delimiters: don't use right-mouse-click; select string instead.
