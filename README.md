@@ -10,9 +10,9 @@ View Labelary, PDF and other base64-encoded formats in separate panel on right-m
 
 Use as follows:
 - Right-click somewhere in the Labelary or Base64 string in the Editor
-- Select `View Panel`
+- Select `View label`
 
-Alternatively, use `Ctrl` + `Shift` + `P` and search for `View Panel`.
+Alternatively, use `Ctrl` + `Shift` + `P` and search for `View label`.
 
 ## Supports
 - Labelary
