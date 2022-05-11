@@ -10,14 +10,16 @@ View Labelary (ZPL), PDF and other base64-encoded formats in separate panel on r
 
 Use as follows:
 - Right-click somewhere in the Labelary or Base64 string in the Editor
-- Select `View label`
+- Select:
+  - `View raw ZPL label` -> for viewing raw ZPLs, delimited by "<>
+  - `View Base64 label` -> for Base64 strings, delimited by "'`<>{}[]()|\/:;, and spaces, newlines, carriage returns
 
-Alternatively, use `Ctrl` + `Shift` + `P` and search for `View label`.
+If delimited by something else: *select string*, right click and again select the option applicable.
 
 ## Supports
-- Labelary
+- Labelary (ZPL)
   - multiple labels in one ZPL string
-  - base64 string or ZPL string
+  - Base64 string or ZPL string
 
 - Base64
   - PDF
