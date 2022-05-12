@@ -16,3 +16,9 @@ All notable changes to the "Labelary" extension will be documented in this file.
 
 ## 1.0.4
 - Changed logo
+
+
+## 1.0.5
+- added two separate buttons:
+  - View raw ZPL label -> for viewing raw ZPLs, delimited by "<>
+  - View Base64 label -> for base64 strings, delimited by "'`<>{}[]()|\/:;, and spaces, newlines, carriage returns

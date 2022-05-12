@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import axios from 'axios';
-import { getUri, removeAfterFirstQuote, removeNewlines, reverseString } from "../utilities/functions";
+import { getUri, removeAfterFirstDelimiter, removeNewlines, reverseString } from "../utilities/functions";
 import { Base64Utils } from '../utilities/base64utils';
 import { Localizer } from '../utilities/localizer';
 import { View } from '../utilities/view';
@@ -13,9 +13,12 @@ export class LabelaryPanel {
   //private _panel: vscode.WebviewPanel;
   private _labelString: string = '';
   private _disposables: vscode.Disposable[] = [];
+  private _type: string = 'base64';
 
   // constructor
-  private constructor(extensionUri: vscode.Uri, context: vscode.ExtensionContext) {
+  private constructor(extensionUri: vscode.Uri, context: vscode.ExtensionContext, type:string) {
+    // set type
+    this._type = type;
 
     // retrieve intended label string
     this._labelString = this._getIntendedLabelString();
@@ -32,8 +35,8 @@ export class LabelaryPanel {
   }
 
   // METHODS
-  public static render(extensionUri: vscode.Uri, context: vscode.ExtensionContext) {
-      LabelaryPanel.currentPanel = new LabelaryPanel(extensionUri, context);
+  public static render(extensionUri: vscode.Uri, context: vscode.ExtensionContext, type:string) {
+      LabelaryPanel.currentPanel = new LabelaryPanel(extensionUri, context, type);
   }
 
   // private _updateWebview(extensionUri: vscode.Uri) {
@@ -63,10 +66,10 @@ export class LabelaryPanel {
         let lastLineLastCharacter:  number = document.lineAt(lastLine).text.length;
   
         let textBeforeRaw = document.getText(new vscode.Range(new vscode.Position(0,0), new vscode.Position(cursorLineNumber, cursorCharNumber)));
-        let labelStringBefore = reverseString(removeAfterFirstQuote(reverseString(removeNewlines(textBeforeRaw))));
+        let labelStringBefore = reverseString(removeAfterFirstDelimiter(reverseString(removeNewlines(textBeforeRaw)),this._type));
 
         let textAfterRaw =  document.getText(new vscode.Range(new vscode.Position(cursorLineNumber,cursorCharNumber), new vscode.Position(lastLine, lastLineLastCharacter)));
-        let labelStringAfter = removeAfterFirstQuote(removeNewlines(textAfterRaw));
+        let labelStringAfter = removeAfterFirstDelimiter(removeNewlines(textAfterRaw),this._type);
 
         intendedLabelString = labelStringBefore + labelStringAfter;
       }

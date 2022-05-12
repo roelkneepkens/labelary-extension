@@ -6,18 +6,20 @@
 
 ![Labelary and PDF viewer](https://raw.githubusercontent.com/roelkneepkens/labelary-extension/main/img/labelary-use-gif.gif)
 
-View Labelary, PDF and other base64-encoded formats in separate panel on right-mouse-button click.
+View Labelary (ZPL), PDF and other base64-encoded formats in separate panel on right-mouse-button click.
 
 Use as follows:
 - Right-click somewhere in the Labelary or Base64 string in the Editor
-- Select `View Panel`
+- Select:
+  - `View raw ZPL label` -> for viewing raw ZPLs, delimited by "<>
+  - `View Base64 label` -> for Base64 strings, delimited by "'`<>{}[]()|\/:;, and spaces, newlines, carriage returns
 
-Alternatively, use `Ctrl` + `Shift` + `P` and search for `View Panel`.
+If delimited by something else: *select string*, right click and again select the option applicable.
 
 ## Supports
-- Labelary
+- Labelary (ZPL)
   - multiple labels in one ZPL string
-  - base64 string or ZPL string
+  - Base64 string or ZPL string
 
 - Base64
   - PDF
@@ -36,6 +38,5 @@ Fork the [repo](https://github.com/roelkneepkens/labelary-extension/) and submit
 
 ## Acknowledgements
 - Incorporated the decoding part of [Jason Mejane](https://marketplace.visualstudio.com/publishers/JasonMejane)'s [Base64Viewer](https://marketplace.visualstudio.com/items?itemName=JasonMejane.base64viewer) (v1.2.1)
-- Extension icon from [labelary.com](http://labelary.com/)
 
 

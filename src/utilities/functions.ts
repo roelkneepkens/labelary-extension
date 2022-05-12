@@ -12,6 +12,8 @@ export function reverseString(string: string) : string {
 	return string.split("").reverse().join("");
 }
 
-export function removeAfterFirstQuote(string: string) : string {
-	return string.replace(/["'`][\s\S]*$/g,'');
+export function removeAfterFirstDelimiter(string: string, type: string) : string {
+	let outString = (type === 'zpl') ? string.replace(/["<>][\s\S]*$/g,'') : string.replace(/["'`<>\{\}\[\]\(\)\|\\\/:;,\s][\s\S]*$/g,'');
+
+	return outString;
 }
