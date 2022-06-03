@@ -34,23 +34,23 @@
     "Viewer"
   ],
   "activationEvents": [
-    "onCommand:labelary.view-label",
     "onCommand:labelary.view-label4x8",
-    "onCommand:labelary.view-labelA4"
+    "onCommand:labelary.view-label8x4",
+    "onCommand:labelary.view-label8.25x11.75"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "labelary.view-label",
-        "title": "View raw ZPL label"
-      },
-      {
         "command": "labelary.view-label4x8",
         "title": "View 4x8"
       },
       {
-        "command": "labelary.view-labelA4",
+        "command": "labelary.view-label8x4",
+        "title": "View 8x4"
+      },
+      {
+        "command": "labelary.view-label8.25x11.75",
         "title": "View A4"
       }
     ],
@@ -63,17 +63,17 @@
       ],
       "labelarysubmenu": [
         {
-          "command": "labelary.view-label",
-          "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
-          "group": "labelary"
-        },
-        {
           "command": "labelary.view-label4x8",
           "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
           "group": "labelary"
         },
         {
-          "command": "labelary.view-labelA4",
+          "command": "labelary.view-label8x4",
+          "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
+          "group": "labelary"
+        },
+        {
+          "command": "labelary.view-label8.25x11.75",
           "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
           "group": "labelary"
         }
