@@ -13,13 +13,13 @@ export class LabelaryPanel {
   //private _panel: vscode.WebviewPanel;
   private _labelString: string = '';
   private _disposables: vscode.Disposable[] = [];
-  private _type: string = 'base64';
+  private _type: string = 'zpl';
   private _labelSize: string;
 
   // constructor
-  private constructor(extensionUri: vscode.Uri, context: vscode.ExtensionContext, type:string, labelSize:string) {
-    // set type
-    this._type = type;
+  private constructor(extensionUri: vscode.Uri, context: vscode.ExtensionContext, labelSize:string) {
+    // set input variables
+    // this._type = type;
     this._labelSize = labelSize;
 
     // retrieve intended label string
@@ -37,8 +37,8 @@ export class LabelaryPanel {
   }
 
   // METHODS
-  public static render(extensionUri: vscode.Uri, context: vscode.ExtensionContext, type:string, labelSize:string="4x8") {
-      LabelaryPanel.currentPanel = new LabelaryPanel(extensionUri, context, type, labelSize);
+  public static render(extensionUri: vscode.Uri, context: vscode.ExtensionContext, labelSize:string="4x8") {
+      LabelaryPanel.currentPanel = new LabelaryPanel(extensionUri, context,labelSize);
   }
 
   // private _updateWebview(extensionUri: vscode.Uri) {
@@ -68,10 +68,10 @@ export class LabelaryPanel {
         let lastLineLastCharacter:  number = document.lineAt(lastLine).text.length;
   
         let textBeforeRaw = document.getText(new vscode.Range(new vscode.Position(0,0), new vscode.Position(cursorLineNumber, cursorCharNumber)));
-        let labelStringBefore = reverseString(removeAfterFirstDelimiter(reverseString(removeNewlines(textBeforeRaw)),this._type));
+        let labelStringBefore = reverseString(removeAfterFirstDelimiter(reverseString(removeNewlines(textBeforeRaw))));
 
         let textAfterRaw =  document.getText(new vscode.Range(new vscode.Position(cursorLineNumber,cursorCharNumber), new vscode.Position(lastLine, lastLineLastCharacter)));
-        let labelStringAfter = removeAfterFirstDelimiter(removeNewlines(textAfterRaw),this._type);
+        let labelStringAfter = removeAfterFirstDelimiter(removeNewlines(textAfterRaw));
 
         intendedLabelString = labelStringBefore + labelStringAfter;
       }

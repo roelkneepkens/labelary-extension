@@ -3,31 +3,25 @@ import { LabelaryPanel } from './panels/labelary_panel';
 
 
 export function activate(context: vscode.ExtensionContext) {
-	// Command for raw ZPL label
-	const rawZplPanelCommand = vscode.commands.registerCommand('labelary.view-zpl-label', () => {
-		LabelaryPanel.render(context.extensionUri, context, 'zpl');
+	// Command for default label
+	const label = vscode.commands.registerCommand('labelary.view-label', () => {
+		LabelaryPanel.render(context.extensionUri, context);
 	});
 	
-	context.subscriptions.push(rawZplPanelCommand);
+	context.subscriptions.push(label);
+
 
 	// Command for raw ZPL label
-	const base64PanelCommand = vscode.commands.registerCommand('labelary.view-base64-label', () => {
-		LabelaryPanel.render(context.extensionUri, context, 'base64');
+	const labelA4 = vscode.commands.registerCommand('labelary.view-labelA4', () => {
+		LabelaryPanel.render(context.extensionUri, context, "8.25x11.75");
 	});
 	
-	context.subscriptions.push(base64PanelCommand);	
+	context.subscriptions.push(labelA4);	
 
 	// Command for raw ZPL label
-	const base64PanelCommandA4 = vscode.commands.registerCommand('labelary.view-zpl-labelA4', () => {
-		LabelaryPanel.render(context.extensionUri, context, 'base64',"8.25x11.75");
+	const label4x8 = vscode.commands.registerCommand('labelary.view-label4x8', () => {
+		LabelaryPanel.render(context.extensionUri, context, "4x8");
 	});
 	
-	context.subscriptions.push(base64PanelCommandA4);	
-
-	// Command for raw ZPL label
-	const base64PanelCommand4x8 = vscode.commands.registerCommand('labelary.view-zpl-label4x8', () => {
-		LabelaryPanel.render(context.extensionUri, context, 'base64',"4x8");
-	});
-	
-	context.subscriptions.push(base64PanelCommand4x8);
+	context.subscriptions.push(label4x8);
 }
