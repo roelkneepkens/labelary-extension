@@ -2,8 +2,14 @@ import * as vscode from 'vscode';  //see https://bobbyhadz.com/blog/typescript-h
 import { LabelaryPanel } from './panels/labelary_panel';
 
 export function activate(context: vscode.ExtensionContext) {
-	let labelSizes = ["8.25x11.75", "4x8", "8x4","3x12"];
-	let labelSizeNames = ["A4", "4x8", "8x4","test"];
+	const labelSizeSetting: string = vscode.workspace.getConfiguration().get<string>('labelary.labelsize') ?? '';
+	let labelSizesRaw: string[] = labelSizeSetting?.split(',').map(x=> x.trim());
+
+	// sizes: strip any possibly defined names in ()
+	let labelSizes: string[] = labelSizesRaw.map( x => x.replace(/\([\s\S]*$/g,'').trim() );
+
+	// Names: if a name is defined in between (), take the name, else take the value
+	let labelSizeNames : string[] = labelSizesRaw.map(x => x.replace(/^[\s\S]*\(([^\)]*)[\s\S]*$/g,'$1').trim() );	
 
 	// Command for default label
 	const label = vscode.commands.registerCommand('labelary.view-labeldefault', () => {
