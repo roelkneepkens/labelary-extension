@@ -6,19 +6,19 @@
   "version": "1.0.5",
   "publisher": "RoelKneepkens-ShipitSmarter",
   "author": {
-		"name": "Roel Kneepkens",
-		"url": "https://github.com/roelkneepkens"
-	},
-	"contributors": [
-		{
-			"name": "Bram van der Horn",
-			"url": "https://github.com/bvanderhorn"
-		},
+    "name": "Roel Kneepkens",
+    "url": "https://github.com/roelkneepkens"
+  },
+  "contributors": [
     {
-			"name": "Wouter Keizer",
-			"url": "https://github.com/WouterKeizer"
-		}
-	],
+      "name": "Bram van der Horn",
+      "url": "https://github.com/bvanderhorn"
+    },
+    {
+      "name": "Wouter Keizer",
+      "url": "https://github.com/WouterKeizer"
+    }
+  ],
   "engines": {
     "vscode": "^1.66.0"
   },
@@ -60,9 +60,25 @@
           "command": "labelary.view-base64-label",
           "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
           "group": "labelary"
+        },
+        {
+          "submenu": "labelarysubmenu",
+          "group": "labelary"
+        }
+      ],
+      "labelarysubmenu": [
+        {
+          "command": "labelary.view-zpl-label",
+          "group": "labelary"
         }
       ]
-    }
+    },
+    "submenus": [
+      {
+        "label": "View label via labelary",
+        "id": "labelarysubmenu"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -90,11 +106,11 @@
     "axios": "^0.26.1",
     "filereader": "^0.10.3",
     "node-fetch": "^2.6.1",
-		"mime": "2.4.6",
-		"pdfjs-dist": "2.4.456",
-		"xss": "1.0.8"
+    "mime": "2.4.6",
+    "pdfjs-dist": "2.4.456",
+    "xss": "1.0.8"
   },
-  "repository":{
+  "repository": {
     "type": "git",
     "url": "https://github.com/roelkneepkens/labelary-extension"
   },
