@@ -13,12 +13,14 @@ export class LabelaryPanel {
   //private _panel: vscode.WebviewPanel;
   private _labelString: string = '';
   private _disposables: vscode.Disposable[] = [];
-  private _type: string = 'base64';
+  private _type: string = 'zpl';
+  private _labelSize: string;
 
   // constructor
-  private constructor(extensionUri: vscode.Uri, context: vscode.ExtensionContext, type:string) {
-    // set type
-    this._type = type;
+  private constructor(extensionUri: vscode.Uri, context: vscode.ExtensionContext, labelSize:string) {
+    // set input variables
+    // this._type = type;
+    this._labelSize = labelSize;
 
     // retrieve intended label string
     this._labelString = this._getIntendedLabelString();
@@ -35,14 +37,28 @@ export class LabelaryPanel {
   }
 
   // METHODS
-  public static render(extensionUri: vscode.Uri, context: vscode.ExtensionContext, type:string) {
-      LabelaryPanel.currentPanel = new LabelaryPanel(extensionUri, context, type);
+  public static render(extensionUri: vscode.Uri, context: vscode.ExtensionContext, labelSize:string="4x8") {
+
+      if (labelSize === 'custom') {
+        // get custom label sizes from labelary.labelsize setting
+        let labelSizeSetting: string = vscode.workspace.getConfiguration().get<string>('labelary.labelsize') ?? '';
+        let labelSizesRaw: string[] = labelSizeSetting?.split(',').map(x=> x.trim());
+
+        // sizes: strip any possibly defined names in ()
+        let labelSizes: string[] = labelSizesRaw.map( x => x.replace(/\([\s\S]*$/g,'').replace(/[^x\d\.]/g,'') );
+
+        // Names: if a name is defined in between (), take the name, else take the value
+        let labelSizeNames : string[] = labelSizesRaw.map(x => x.replace(/^[\s\S]*\(([^\)]*)[\s\S]*$/g,'$1').trim() );
+        vscode.window.showQuickPick(labelSizeNames, { placeHolder: 'Choose the label size...' }).then( labelSizeName => {
+          labelSize = labelSizes[labelSizeNames.indexOf(labelSizeName ?? '')];
+          LabelaryPanel.currentPanel = new LabelaryPanel(extensionUri, context,labelSize);
+        });
+        
+      } else {
+        LabelaryPanel.currentPanel = new LabelaryPanel(extensionUri, context,labelSize);
+      }
+      
   }
-
-  // private _updateWebview(extensionUri: vscode.Uri) {
-  //   this._getZplWebviewContent(this._panel.webview, extensionUri).then(html => this._panel.webview.html = html);
-  // }
-
 
   private _getIntendedLabelString(): string {
     const editor = vscode.window.activeTextEditor;
@@ -66,10 +82,10 @@ export class LabelaryPanel {
         let lastLineLastCharacter:  number = document.lineAt(lastLine).text.length;
   
         let textBeforeRaw = document.getText(new vscode.Range(new vscode.Position(0,0), new vscode.Position(cursorLineNumber, cursorCharNumber)));
-        let labelStringBefore = reverseString(removeAfterFirstDelimiter(reverseString(removeNewlines(textBeforeRaw)),this._type));
+        let labelStringBefore = reverseString(removeAfterFirstDelimiter(reverseString(removeNewlines(textBeforeRaw))));
 
         let textAfterRaw =  document.getText(new vscode.Range(new vscode.Position(cursorLineNumber,cursorCharNumber), new vscode.Position(lastLine, lastLineLastCharacter)));
-        let labelStringAfter = removeAfterFirstDelimiter(removeNewlines(textAfterRaw),this._type);
+        let labelStringAfter = removeAfterFirstDelimiter(removeNewlines(textAfterRaw));
 
         intendedLabelString = labelStringBefore + labelStringAfter;
       }
@@ -219,11 +235,11 @@ export class LabelaryPanel {
   };
 
   private async _getPNGFromLabelary(zpl: string): Promise<string> {
-
+    
     const response = await axios({
       method: "POST",
       data: zpl,
-      url: 'http://api.labelary.com/v1/printers/8dpmm/labels/4x8/0',
+      url: `http://api.labelary.com/v1/printers/8dpmm/labels/${this._labelSize}/0`,
       responseType: 'arraybuffer',
       responseEncoding: "binary",
       headers: {

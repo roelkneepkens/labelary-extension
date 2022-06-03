@@ -6,19 +6,19 @@
   "version": "1.0.5",
   "publisher": "RoelKneepkens-ShipitSmarter",
   "author": {
-		"name": "Roel Kneepkens",
-		"url": "https://github.com/roelkneepkens"
-	},
-	"contributors": [
-		{
-			"name": "Bram van der Horn",
-			"url": "https://github.com/bvanderhorn"
-		},
+    "name": "Roel Kneepkens",
+    "url": "https://github.com/roelkneepkens"
+  },
+  "contributors": [
     {
-			"name": "Wouter Keizer",
-			"url": "https://github.com/WouterKeizer"
-		}
-	],
+      "name": "Bram van der Horn",
+      "url": "https://github.com/bvanderhorn"
+    },
+    {
+      "name": "Wouter Keizer",
+      "url": "https://github.com/WouterKeizer"
+    }
+  ],
   "engines": {
     "vscode": "^1.66.0"
   },
@@ -34,34 +34,81 @@
     "Viewer"
   ],
   "activationEvents": [
-    "onCommand:labelary.view-zpl-label",
-    "onCommand:labelary.view-base64-label"
+    "onCommand:labelary.view-labeldefault",
+    "onCommand:labelary.view-label4x8",
+    "onCommand:labelary.view-label8x4",
+    "onCommand:labelary.view-labelA4",
+    "onCommand:labelary.view-labelcustom"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "labelary.view-zpl-label",
-        "title": "View raw ZPL label"
+        "command": "labelary.view-labeldefault",
+        "title": "View label"
+      },{
+        "command": "labelary.view-label4x8",
+        "title": "4x8 portrait (default)"
       },
       {
-        "command": "labelary.view-base64-label",
-        "title": "View Base64 label"
+        "command": "labelary.view-label8x4",
+        "title": "8x4 landscape"
+      },
+      {
+        "command": "labelary.view-labelA4",
+        "title": "A4 portrait"
+      },
+      {
+        "command": "labelary.view-labelcustom",
+        "title": "Custom..."
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "labelary.view-zpl-label",
+          "command": "labelary.view-labeldefault",
           "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
           "group": "labelary"
         },
         {
-          "command": "labelary.view-base64-label",
-          "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
+          "submenu": "labelarysubmenu",
+          "group": "labelary"
+        }
+      ],
+      "labelarysubmenu": [
+        {
+          "command": "labelary.view-label4x8",
+          "group": "labelary"
+        },
+        {
+          "command": "labelary.view-label8x4",
+          "group": "labelary"
+        },
+        {
+          "command": "labelary.view-labelA4",
+          "group": "labelary"
+        },
+        {
+          "command": "labelary.view-labelcustom",
           "group": "labelary"
         }
       ]
+    },
+    "submenus": [
+      {
+        "label": "View label: choose size",
+        "id": "labelarysubmenu"
+      }
+    ],
+    "configuration": {
+      "title": "Labelary and PDF viewer",
+      "properties": {
+        "labelary.labelsize": {
+          "type": "string",
+          "default": "11.75x8.25 (A4 landscape), 5.83x8.27 (A5 portrait), 6x4, 5.98x3.98 (ELEA)",
+          "description": "Label sizes (in inches) - format: '[width]x[height] (name 1), [width]x[height] (name 2), ...'"
+        }
+      }
     }
   },
   "scripts": {
@@ -90,11 +137,11 @@
     "axios": "^0.26.1",
     "filereader": "^0.10.3",
     "node-fetch": "^2.6.1",
-		"mime": "2.4.6",
-		"pdfjs-dist": "2.4.456",
-		"xss": "1.0.8"
+    "mime": "2.4.6",
+    "pdfjs-dist": "2.4.456",
+    "xss": "1.0.8"
   },
-  "repository":{
+  "repository": {
     "type": "git",
     "url": "https://github.com/roelkneepkens/labelary-extension"
   },
