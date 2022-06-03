@@ -2,15 +2,6 @@ import * as vscode from 'vscode';  //see https://bobbyhadz.com/blog/typescript-h
 import { LabelaryPanel } from './panels/labelary_panel';
 
 export function activate(context: vscode.ExtensionContext) {
-	const labelSizeSetting: string = vscode.workspace.getConfiguration().get<string>('labelary.labelsize') ?? '';
-	let labelSizesRaw: string[] = labelSizeSetting?.split(',').map(x=> x.trim());
-
-	// sizes: strip any possibly defined names in ()
-	let labelSizes: string[] = labelSizesRaw.map( x => x.replace(/\([\s\S]*$/g,'').trim() );
-
-	// Names: if a name is defined in between (), take the name, else take the value
-	let labelSizeNames : string[] = labelSizesRaw.map(x => x.replace(/^[\s\S]*\(([^\)]*)[\s\S]*$/g,'$1').trim() );	
-
 	// Command for default label
 	const label = vscode.commands.registerCommand('labelary.view-labeldefault', () => {
 		LabelaryPanel.render(context.extensionUri, context);
@@ -37,14 +28,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Command for default label
 	const labelcustom = vscode.commands.registerCommand('labelary.view-labelcustom', () => {
-
-
-		vscode.window.showQuickPick(labelSizeNames, { placeHolder: 'Choose the label size...' }).then(
-			(selectedSize) => {
-				LabelaryPanel.render(context.extensionUri, context, labelSizes[labelSizeNames.indexOf(selectedSize ?? '')]);
-			}
-		);
-		
+		LabelaryPanel.render(context.extensionUri, context, 'custom');
 	});	
 	context.subscriptions.push(labelcustom);
 }

@@ -38,13 +38,27 @@ export class LabelaryPanel {
 
   // METHODS
   public static render(extensionUri: vscode.Uri, context: vscode.ExtensionContext, labelSize:string="4x8") {
-      LabelaryPanel.currentPanel = new LabelaryPanel(extensionUri, context,labelSize);
+
+      if (labelSize === 'custom') {
+        // get custom label sizes from labelary.labelsize setting
+        let labelSizeSetting: string = vscode.workspace.getConfiguration().get<string>('labelary.labelsize') ?? '';
+        let labelSizesRaw: string[] = labelSizeSetting?.split(',').map(x=> x.trim());
+
+        // sizes: strip any possibly defined names in ()
+        let labelSizes: string[] = labelSizesRaw.map( x => x.replace(/\([\s\S]*$/g,'').replace(/[^x\d\.]/g,'') );
+
+        // Names: if a name is defined in between (), take the name, else take the value
+        let labelSizeNames : string[] = labelSizesRaw.map(x => x.replace(/^[\s\S]*\(([^\)]*)[\s\S]*$/g,'$1').trim() );
+        vscode.window.showQuickPick(labelSizeNames, { placeHolder: 'Choose the label size...' }).then( labelSizeName => {
+          labelSize = labelSizes[labelSizeNames.indexOf(labelSizeName ?? '')];
+          LabelaryPanel.currentPanel = new LabelaryPanel(extensionUri, context,labelSize);
+        });
+        
+      } else {
+        LabelaryPanel.currentPanel = new LabelaryPanel(extensionUri, context,labelSize);
+      }
+      
   }
-
-  // private _updateWebview(extensionUri: vscode.Uri) {
-  //   this._getZplWebviewContent(this._panel.webview, extensionUri).then(html => this._panel.webview.html = html);
-  // }
-
 
   private _getIntendedLabelString(): string {
     const editor = vscode.window.activeTextEditor;
@@ -221,7 +235,7 @@ export class LabelaryPanel {
   };
 
   private async _getPNGFromLabelary(zpl: string): Promise<string> {
-
+    
     const response = await axios({
       method: "POST",
       data: zpl,

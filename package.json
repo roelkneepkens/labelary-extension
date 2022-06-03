@@ -45,18 +45,18 @@
     "commands": [
       {
         "command": "labelary.view-labeldefault",
-        "title": "View Label"
+        "title": "View label"
       },{
         "command": "labelary.view-label4x8",
-        "title": "4x8"
+        "title": "4x8 portrait (default)"
       },
       {
         "command": "labelary.view-label8x4",
-        "title": "8x4"
+        "title": "8x4 landscape"
       },
       {
         "command": "labelary.view-labelA4",
-        "title": "A4"
+        "title": "A4 portrait"
       },
       {
         "command": "labelary.view-labelcustom",
@@ -96,7 +96,7 @@
     },
     "submenus": [
       {
-        "label": "View label via labelary",
+        "label": "View label: choose size",
         "id": "labelarysubmenu"
       }
     ],
@@ -105,8 +105,8 @@
       "properties": {
         "labelary.labelsize": {
           "type": "string",
-          "default": "4x8",
-          "description": "Label sizes"
+          "default": "11.75x8.25 (A4 landscape), 5.83x8.27 (A5 portrait), 6x4, 5.98x3.98 (ELEA)",
+          "description": "Label sizes (in inches) - format: '[width]x[height] (name 1), [width]x[height] (name 2), ...'"
         }
       }
     }
