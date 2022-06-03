@@ -36,7 +36,8 @@
   "activationEvents": [
     "onCommand:labelary.view-label4x8",
     "onCommand:labelary.view-label8x4",
-    "onCommand:labelary.view-label8.25x11.75"
+    "onCommand:labelary.view-label8.25x11.75",
+    "onCommand:labelary.view-label${vscode.workspace.getConfiguration('labelary.labelsize')}"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -84,7 +85,17 @@
         "label": "View label via labelary",
         "id": "labelarysubmenu"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Labelary and PDF viewer",
+      "properties": {
+        "labelary.labelsize": {
+          "type": "string",
+          "default": "4x8",
+          "description": "Label sizes"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
