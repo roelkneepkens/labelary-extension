@@ -16,7 +16,8 @@ Use as follows:
     - List of defaulted sizes
     - `custom...`: this will open a quickpick to select custom formats that can be defined in the extension settings 
       - Access via: <kbd>Ctrl</kbd> + <kbd>,</kbd> --> <kbd>Labelary</kbd>
-- In case the selection does nt work: *select string*, right click and again select the option applicable.
+      - ![labelary settings](https://raw.githubusercontent.com/roelkneepkens/labelary-extension/main/img/labelary-setting.png)
+- In case the selection does not work: *select string*, right click and again select the option applicable.
 
 ## Supports
 - Labelary (ZPL)
