@@ -34,29 +34,42 @@
     "Viewer"
   ],
   "activationEvents": [
+    "onCommand:labelary.view-labeldefault",
     "onCommand:labelary.view-label4x8",
     "onCommand:labelary.view-label8x4",
     "onCommand:labelary.view-label8.25x11.75",
-    "onCommand:labelary.view-label${vscode.workspace.getConfiguration('labelary.labelsize')}"
+    "onCommand:labelary.view-labelcustom"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
+        "command": "labelary.view-labeldefault",
+        "title": "View Label"
+      },{
         "command": "labelary.view-label4x8",
-        "title": "View 4x8"
+        "title": "4x8"
       },
       {
         "command": "labelary.view-label8x4",
-        "title": "View 8x4"
+        "title": "8x4"
       },
       {
         "command": "labelary.view-label8.25x11.75",
-        "title": "View A4"
+        "title": "A4"
+      },
+      {
+        "command": "labelary.view-labelcustom",
+        "title": "Custom..."
       }
     ],
     "menus": {
       "editor/context": [
+        {
+          "command": "labelary.view-labeldefault",
+          "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
+          "group": "labelary"
+        },
         {
           "submenu": "labelarysubmenu",
           "group": "labelary"
@@ -65,17 +78,18 @@
       "labelarysubmenu": [
         {
           "command": "labelary.view-label4x8",
-          "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
           "group": "labelary"
         },
         {
           "command": "labelary.view-label8x4",
-          "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
           "group": "labelary"
         },
         {
           "command": "labelary.view-label8.25x11.75",
-          "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
+          "group": "labelary"
+        },
+        {
+          "command": "labelary.view-labelcustom",
           "group": "labelary"
         }
       ]
