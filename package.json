@@ -47,15 +47,18 @@
       {
         "command": "labelary.view-base64-label",
         "title": "View Base64 label"
+      },
+      {
+        "command": "labelary.view-zpl-label4x8",
+        "title": "View 4x8"
+      },
+      {
+        "command": "labelary.view-zpl-labelA4",
+        "title": "View A4"
       }
     ],
     "menus": {
       "editor/context": [
-        {
-          "command": "labelary.view-zpl-label",
-          "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
-          "group": "labelary"
-        },
         {
           "command": "labelary.view-base64-label",
           "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
@@ -69,6 +72,17 @@
       "labelarysubmenu": [
         {
           "command": "labelary.view-zpl-label",
+          "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
+          "group": "labelary"
+        },
+        {
+          "command": "labelary.view-zpl-label4x8",
+          "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
+          "group": "labelary"
+        },
+        {
+          "command": "labelary.view-zpl-labelA4",
+          "when": "editorTextFocus || editorHasSelection || editorReadonly || isInDiffEditor || isInEmbeddedEditor",
           "group": "labelary"
         }
       ]

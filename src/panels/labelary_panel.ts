@@ -14,11 +14,13 @@ export class LabelaryPanel {
   private _labelString: string = '';
   private _disposables: vscode.Disposable[] = [];
   private _type: string = 'base64';
+  private _labelSize: string;
 
   // constructor
-  private constructor(extensionUri: vscode.Uri, context: vscode.ExtensionContext, type:string) {
+  private constructor(extensionUri: vscode.Uri, context: vscode.ExtensionContext, type:string, labelSize:string) {
     // set type
     this._type = type;
+    this._labelSize = labelSize;
 
     // retrieve intended label string
     this._labelString = this._getIntendedLabelString();
@@ -35,8 +37,8 @@ export class LabelaryPanel {
   }
 
   // METHODS
-  public static render(extensionUri: vscode.Uri, context: vscode.ExtensionContext, type:string) {
-      LabelaryPanel.currentPanel = new LabelaryPanel(extensionUri, context, type);
+  public static render(extensionUri: vscode.Uri, context: vscode.ExtensionContext, type:string, labelSize:string="4x8") {
+      LabelaryPanel.currentPanel = new LabelaryPanel(extensionUri, context, type, labelSize);
   }
 
   // private _updateWebview(extensionUri: vscode.Uri) {
@@ -223,7 +225,7 @@ export class LabelaryPanel {
     const response = await axios({
       method: "POST",
       data: zpl,
-      url: 'http://api.labelary.com/v1/printers/8dpmm/labels/4x8/0',
+      url: `http://api.labelary.com/v1/printers/8dpmm/labels/${this._labelSize}/0`,
       responseType: 'arraybuffer',
       responseEncoding: "binary",
       headers: {
